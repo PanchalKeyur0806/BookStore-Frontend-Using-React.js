@@ -2,8 +2,6 @@ import React from "react";
 import { MdNavigateNext } from "react-icons/md";
 
 function Hero() {
-  const heroImg =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx-BRdbC5SPBJLzYOf-mHerSTECJPwqcXknA&s";
   return (
     <>
       <div className=" mt-5 md:bg-gradient-to-r md:from-blue-100 md:to-pink-50">
