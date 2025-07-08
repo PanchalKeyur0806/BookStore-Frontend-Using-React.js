@@ -1,4 +1,5 @@
 import Categories from "./components/Categories/Categories";
+import Discounts from "./components/Discounts/Discounts";
 import FeaturedBooks from "./components/FeaturedBooks/FeaturedBooks";
 import Footer from "./components/Footer/Footer";
 import Hero from "./components/Hero/Hero";
@@ -13,6 +14,7 @@ function App() {
       <Categories />
       <NewReleases />
       <FeaturedBooks />
+      <Discounts />
       <Footer />
     </>
   );
