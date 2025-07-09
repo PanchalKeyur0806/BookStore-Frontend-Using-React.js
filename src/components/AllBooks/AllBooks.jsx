@@ -312,6 +312,19 @@ function AllBooks() {
                 </div>
               </div>
             </div>
+
+            <div
+              id="pageNo"
+              className="mt-10 flex gap-5 justify-center items-center"
+            >
+              <button className="text-white bg-blue-950 px-3 py-2 rounded cursor-pointer">
+                Previous
+              </button>
+              <p className="rounded-full border-2 px-3 py-1 font-bold">1</p>
+              <button className="bg-[#ed573d] text-white px-3 py-2 rounded cursor-pointer">
+                Next
+              </button>
+            </div>
           </section>
         </section>
       </main>
