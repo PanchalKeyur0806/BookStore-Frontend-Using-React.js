@@ -12,6 +12,7 @@ import AllBooks from "./components/AllBooks/AllBooks.jsx";
 import Layout from "./Layout.jsx";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import ContactUs from "./components/ContactUs/ContactUs.jsx";
+import Book from "./components/Book/Book.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
         <Route path="books" element={<AllBooks />} />
         <Route path="aboutus" element={<AboutUs />} />
         <Route path="contactus" element={<ContactUs />} />
+        <Route path="book/:bookid" element={<Book />} />
       </Route>
     </>
   )
