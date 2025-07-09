@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { IoCall } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa";
 import { CiFacebook } from "react-icons/ci";
@@ -60,16 +61,16 @@ function Navbar() {
             <div className="hidden md:block">
               <ul className="flex items-center gap-6">
                 <li className="hover:text-blue-900 cursor-pointer hover:underline underline-offset-8  transition-all duration-150 ease-in">
-                  Home
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li className="hover:text-blue-900 cursor-pointer hover:underline underline-offset-8  transition-all duration-150 ease-in">
-                  Books
+                  <NavLink to="/books">Books</NavLink>
                 </li>
                 <li className="hover:text-blue-900 cursor-pointer hover:underline underline-offset-8  transition-all duration-150 ease-in">
-                  About us
+                  <NavLink to="/aboutus">About us</NavLink>
                 </li>
                 <li className="hover:text-blue-900 cursor-pointer hover:underline underline-offset-8  transition-all duration-150 ease-in">
-                  Contact us
+                  <NavLink to="/contactus">Contact us</NavLink>
                 </li>
               </ul>
             </div>
