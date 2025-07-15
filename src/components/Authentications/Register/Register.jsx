@@ -1,14 +1,64 @@
-import React from "react";
+import axios from "axios";
+import React, { useActionState, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const [data, action, pending] = useActionState(handleSubmit, null);
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  // fetch the data
+  async function fetchData(fields) {
+    try {
+      const url = "http://localhost:8002/auth/register";
+      let response = await axios.post(url, fields);
+      let data = response.data;
+
+      setStatus(data.status);
+      setMessage(data.message);
+      setError("");
+      setTimeout(() => {
+        navigate("/verifyOtp");
+      }, 1000);
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  }
+  // handle submit
+  async function handleSubmit(preData, formData) {
+    const userData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      dateOfBirth: formData.get("dateOfBirth"),
+      phoneNumber: formData.get("phoneNumber"),
+      gender: formData.get("gender"),
+      address: {
+        line: formData.get("line"),
+        street: formData.get("street"),
+        city: formData.get("city"),
+        state: formData.get("state"),
+        country: formData.get("country"),
+        zipCode: formData.get("zipCode"),
+      },
+    };
+
+    fetchData(userData);
+  }
   return (
     <section className="my-10 w-[95%] md:w-[60%] mx-auto  rounded-lg shadow-lg">
+      <div className="text-red-800 text-center text-xl">{error && error}</div>
+      <div className="text-green-800 text-center text-xl">
+        {status && message}
+      </div>
+
       <div className="text-3xl font-bold font-serif text-center my-3">
-        {" "}
         Register
       </div>
       <div>
-        <form action="" method="post">
+        <form action={action}>
           {/* name */}
           <div className="my-5 flex flex-col gap-2 mx-5">
             <label htmlFor="name" className="font-medium">
@@ -193,8 +243,12 @@ function Register() {
             />
           </div>
 
-          <div className="py-3 mt-5 mx-5 text-center cursor-pointer bg-blue-700 text-white hover:bg-blue-600">
-            <input type="submit" value="Register" />
+          <div className="mt-5 mx-5 pb-5 text-center  ">
+            <input
+              type="submit"
+              value="Register"
+              className="py-3 px-4 w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+            />
           </div>
         </form>
       </div>
