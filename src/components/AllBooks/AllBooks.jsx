@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import { FaFilter } from "react-icons/fa";
 
 function AllBooks() {
   const [openFilter, setOpenFilter] = useState(false);
   const [isMobile, setMobile] = useState(window.innerWidth < 1280);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const resizeWindow = () => {
@@ -13,6 +15,19 @@ function AllBooks() {
 
     window.addEventListener("resize", resizeWindow);
     return window.removeEventListener("resize", resizeWindow);
+  }, []);
+
+  // fetching url to get data
+  useEffect(() => {
+    // fetch user from api
+    const fetchUser = async () => {
+      const url = "http://localhost:8002/books";
+      const res = await axios.get(url);
+      setBooks(res.data.data);
+    };
+
+    // calling the function
+    fetchUser();
   }, []);
 
   // Open & close filters
@@ -140,7 +155,39 @@ function AllBooks() {
               id="BooksCards"
               className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
-              <div id="BookCard" className="rounded shadow cursor-pointer">
+              {books.map((item) => {
+                console.log(item);
+
+                return (
+                  <div
+                    id="BookCard"
+                    className="rounded shadow cursor-pointer"
+                    key={item._id}
+                  >
+                    <div
+                      id="BookImg"
+                      className=" flex gap-2 justify-center items-center"
+                    >
+                      <img
+                        src={item.coverImage ? item.coverImage : bookImg}
+                        alt="BookImg"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div id="BookContent" className="text-center">
+                      <h1 className="mb-2 text-blue-950 font-medium">
+                        {item.title}
+                      </h1>
+                      <h3 className="text-sm font-extralight">Author Name</h3>
+                      <h1 className="mt-2 text-[#ed573d] font-extrabold">
+                        $ {item.price}/-
+                      </h1>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* <div id="BookCard" className="rounded shadow cursor-pointer">
                 <div
                   id="BookImg"
                   className="h-[75%] flex gap-2 justify-center items-center"
@@ -291,26 +338,7 @@ function AllBooks() {
                   <h3 className="text-sm font-extralight">Author Name</h3>
                   <h1 className="mt-2 text-[#ed573d] font-extrabold">$ 40/-</h1>
                 </div>
-              </div>
-              <div id="BookCard" className="rounded shadow cursor-pointer">
-                <div
-                  id="BookImg"
-                  className="h-[75%] flex gap-2 justify-center items-center"
-                >
-                  <img
-                    src={bookImg}
-                    alt="BookImg"
-                    className="w-[70%] h-[80%] shadow rounded"
-                  />
-                </div>
-                <div id="BookContent" className="text-center">
-                  <h1 className="mb-2 text-blue-950 font-medium">
-                    Sophies world
-                  </h1>
-                  <h3 className="text-sm font-extralight">Author Name</h3>
-                  <h1 className="mt-2 text-[#ed573d] font-extrabold">$ 40/-</h1>
-                </div>
-              </div>
+              </div> */}
             </div>
 
             <div
