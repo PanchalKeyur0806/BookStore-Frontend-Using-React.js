@@ -1,28 +1,37 @@
 import React from "react";
 import { IoMdStar } from "react-icons/io";
+import { useParams } from "react-router-dom";
+import { useFetchItem } from "../../hooks/fetchItemHook";
 
 function Book() {
-  const bookImg = "https://m.media-amazon.com/images/I/A14CZcMfAkL.jpg";
+  const params = useParams();
+  const { data, error } = useFetchItem(
+    "http://localhost:8002/books/683697c5c4efe00d7ca88e5a"
+  );
+  const reviewData = useFetchItem(
+    `http://localhost:8002/books/${params.bookid}/review`
+  );
+
   return (
     <main>
       <section className="w-[80vw] mx-auto">
         <div className="flex flex-col md:flex-row ">
           <div className=" md:w-1/4 overflow-hidden">
-            <img src={bookImg} alt="" className="rounded md:w-3/4 mx-auto" />
+            <img
+              src={data?.coverImage}
+              alt=""
+              className="rounded md:w-3/4 mx-auto"
+            />
           </div>
           <div className="md:w-3/4 md:ml-10">
             <div>
               <h1 className="text-3xl font-extrabold  text-[#ed573d]">
-                Book Name will be showen here
+                {data?.title}
               </h1>
-              <h3 className="mt-3 font-medium">Author </h3>
-              <h3 className="mt-3 ">Category :- </h3>
-              <p className="mt-4 font-medium">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
-                quis! Temporibus neque sequi officia, doloribus minus tempore
-                odio et repellendus.
-              </p>
-              <p className="mt-5">Review will be showen here</p>
+              <h3 className="mt-3 font-medium">Author :- {data?.author}</h3>
+              <h3 className="mt-3 ">Category :- {data?.category}</h3>
+              <p className="mt-4 font-medium">{data?.description}</p>
+              <p className="mt-5">{data?.rating} / 5.0</p>
               <p className="mt-5 text-2xl font-bold text-[#ed573d]">$ 40/- </p>
             </div>
             <div className="mt-5 flex gap-10  items-center">
