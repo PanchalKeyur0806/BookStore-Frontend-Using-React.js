@@ -15,6 +15,7 @@ import ContactUs from "./components/ContactUs/ContactUs.jsx";
 import Book from "./components/Book/Book.jsx";
 import Register from "./components/Authentications/Register/Register.jsx";
 import VerifyOtp from "./components/Authentications/VerifyOtp/VerifyOtp.jsx";
+import Login from "./components/Authentications/LogIn/Login.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Layout />}>
         <Route path="register" element={<Register />} />
         <Route path="verifyOtp" element={<VerifyOtp />} />
+        <Route path="login" element={<Login />} />
         <Route path="books" element={<AllBooks />} />
         <Route path="aboutus" element={<AboutUs />} />
         <Route path="contactus" element={<ContactUs />} />

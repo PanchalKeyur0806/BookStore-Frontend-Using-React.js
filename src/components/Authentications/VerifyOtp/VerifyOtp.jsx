@@ -21,7 +21,7 @@ function VerifyOtp() {
       localStorage.setItem("token", data.token);
       setMessage(data.message);
     } catch (error) {
-      setError(error.message);
+      setError(error.response.data.message);
     }
   }
 
